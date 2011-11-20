@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="dns-prefetch" href="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" />
+    <title>Bluedhip Banking</title>
+    <meta name="description" content="Develop a prototype personal banking application, for uni assignment">
+    <meta name="author" content="David Brennan">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="bootstrap.css" rel="stylesheet">
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  </head>
+
+  <body id="accounts">
+
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <h1 class="title">Accounts</h1>
+          <a class="pull-left btn primary" href="home.html">Home</a>
+          <a class="pull-right btn primary" href="#">Settings</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div id="wrapscroll" class="content">
+      
+      	<div id="viewport">
+        	<div id="view-content">
+            	<div class="account">
+                
+                	<div class="row">
+                        <h2 class="pull-left">Current Account</h2>
+                        <h2 class="pull-right">£3,500.00</h2>
+                    </div>
+                    <div class="row">
+                        <h3>51560095608</h3>
+                    </div>
+                    <div class="row settings">
+                        <a class="btn pull-left" href="#">November</a>
+                        <a class="btn pull-right" href="#">Month</a>
+                    </div>
+                    
+                    <div class="row">
+                        <div id="currentaccount" class="piechart"></div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="block-unit">
+                          <h2>Household Bills</h2>
+                          <div class="row">
+                              <div class="billDetails pull-left span-half">
+                                  <h2>Budget:</h2>
+                                  <div class="total">£250.00</div>
+                              </div>
+                              <div class="billDetails pull-right span-half">
+                                  <h2>Actual:</h2>
+                                  <div class="total">£200.00</div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="account">
+                
+                	<div class="row">
+                        <h2 class="pull-left">Savings Account</h2>
+                        <h2 class="pull-right">£15,000.00</h2>
+                    </div>
+                    <div class="row">
+                        <h3>51560095608</h3>
+                    </div>
+                    <div class="row settings">
+                        <a class="btn pull-left" href="#">December</a>
+                        <a class="btn pull-right" href="#">Month</a>
+                    </div>
+                    
+                    <div class="row">
+                        <div id="savingsaccount" class="piechart"></div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="block-unit">
+                          <h2>Christmas Gifts</h2>
+                          <div class="row">
+                              <div class="billDetails pull-left span-half">
+                                  <h2>Budget:</h2>
+                                  <div class="total">£500.00</div>
+                              </div>
+                              <div class="billDetails pull-right span-half">
+                                  <h2>Actual:</h2>
+                                  <div class="total">£100.00</div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+
+  </body>
+  
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-twipsy.js"></script>
+<script type="text/javascript" src="js/jquery.gchart.min.js"></script>
+<script type="text/javascript" src="js/iscroll-lite.js"></script>
+
+<script type="text/javascript">
+	var myScroll;
+	function loaded() {
+		myScroll = new iScroll('viewport', {hScrollbar: false, vScrollbar: false});
+	}
+	window.addEventListener('load', loaded, false);
+</script>
+
+<script type="text/javascript">
+	$(function () { 
+		
+		var currentaccount = [$.gchart.series('Current Account', [60, 10, 30], 'blue')]; 
+			 
+		$('#currentaccount').gchart({
+			type: 'pie3D', 
+			series: currentaccount, 
+			legend: 'bottom',
+			maxValue: 100,
+			minValue: 0,  
+			extension: {chdl: 'Houehold Bills|Internet Connection|Mobile Phone'}
+		}); 
+		
+		var savingsaccount = [$.gchart.series('Current Account', [5, 70, 25], 'blue')]; 
+			 
+		$('#savingsaccount').gchart({
+			type: 'pie3D', 
+			series: savingsaccount, 
+			legend: 'bottom',
+			maxValue: 100,
+			minValue: 0,  
+			extension: {chdl: 'Christmas Gifts|New House|New Car'}
+		});
+		
+    	$("*[rel=twipsy]").twipsy({
+		  trigger: 'manual',
+		  animate: true,
+		  html: true
+		}).each(function(){
+			$(this).twipsy('show');
+		});
+		window.setTimeout(function() {
+			$("*[rel=twipsy]").twipsy('hide');
+		}, 5000);
+		
+    });
+</script>
+
+</html>
